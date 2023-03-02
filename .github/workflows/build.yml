@@ -41,7 +41,7 @@ jobs:
           input_string: ${{ steps.pack.outputs.version }}
 
       - name: 📢 Publish dist files to dist branch
-        uses: s0/git-publish-subdir-action@v2.4.0
+        uses: s0/git-publish-subdir-action@v2.6.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: self
