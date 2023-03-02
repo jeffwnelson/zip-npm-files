@@ -29,3 +29,22 @@ jobs:
         uses: ./
         with:
           files: dist, action.yml
+
+      - name: ⚙️ Unzip dist files
+        run: |
+          mkdir TODEPLOY
+          unzip ${{ steps.pack.outputs.archive }} -d TODEPLOY
+      - name: ⚙️ Parse version string
+        id: version
+        uses: booxmedialtd/ws-action-parse-semver@v1
+        with:
+          input_string: ${{ steps.pack.outputs.version }}
+
+      - name: 📢 Publish dist files to dist branch
+        uses: s0/git-publish-subdir-action@v2.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: self
+          BRANCH: v${{ steps.version.outputs.major }}
+          FOLDER: TODEPLOY
+          SKIP_EMPTY_COMMITS: true
