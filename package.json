@@ -3,22 +3,13 @@
   "version": "1.0.0",
   "description": "Zip specific files of npm project for deployment and distribution",
   "private": false,
-  "keywords": [
-    "action",
-    "github",
-    "zip",
-    "npm",
-    "deployment"
-  ],
   "repository": {
     "type": "git"
   },
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "build": "ncc build src/index.js --license licenses.txt",
-    "postversion": "cross-var git add package.json package-lock.json && git commit -mv%npm_package_version% && git push"
-  },
+    "build": "ncc build src/index.js"},
   "license": "ISC",
   "dependencies": {
     "@actions/core": "^1.10.0",
