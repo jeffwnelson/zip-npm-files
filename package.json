@@ -2,21 +2,21 @@
   "name": "zip-npm-files",
   "version": "1.0.0",
   "description": "Zip specific files of npm project for deployment and distribution",
-  "private": false,
   "repository": {
     "type": "git"
   },
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "build": "ncc build src/index.js"},
-  "license": "ISC",
+    "build": "tsc",
+    "ncc": "ncc build dist/index.js"
+  },
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@vercel/ncc": "^0.36.1",
     "bestzip": "^2.2.1"
   },
   "devDependencies": {
-    "cross-var": "^1.1.0"
+    "typescript": "^5.0.4"
   }
 }

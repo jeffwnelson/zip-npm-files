@@ -1,9 +1,7 @@
-const fs = require("fs");
-const path = require("path");
-const core = require("@actions/core");
-const zip = require("bestzip");
-
-zipFiles();
+import * as fs from 'fs';
+import * as path from 'path';
+import * as core from '@actions/core';
+import * as zip from 'bestzip';
 
 async function zipFiles() {
   try {
@@ -12,10 +10,10 @@ async function zipFiles() {
     const cwd = core.getInput("cwd");
 
     // Parse local package.json file
-    const package = JSON.parse(fs.readFileSync("package.json").toString());
+    const file = JSON.parse(fs.readFileSync("package.json").toString());
 
     // Compose name of zip archive
-    const zipName = package.name + package.version + ".zip";
+    const zipName = file.name + file.version + ".zip";
 
     // Prepare array of files to zip
     const source = filesToZip.split(",").map((f) => f.trim());
@@ -34,11 +32,14 @@ async function zipFiles() {
 
     // Set outputs
     core.setOutput("archive", archivePath);
-    core.setOutput("name", package.name);
-    core.setOutput("version", package.version);
+    core.setOutput("name", file.name);
+    core.setOutput("version", file.version);
+
   } catch (error) {
     // Process error
     console.error(error.stack);
     core.setFailed(error.message);
   }
 }
+
+zipFiles();
